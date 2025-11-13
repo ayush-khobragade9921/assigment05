@@ -3,33 +3,14 @@ import "./App.css";
 import useFetch from "./hooks/useFetch";
 
 function App() {
-  const { loading, error, isOffline } = useFetch("https://jsonplaceholder.typicode.com/posts");
-
-  const colors = [
-    "red",
-    "pink",
-    "yellow",
-    "green",
-    "lime",
-    "gray",
-    "skyblue",
-    "lightgray",
-    "hotpink",
-    "blue",
-    "khaki",
-    "salmon",
-    "purple",
-    "orange",
-    "teal",
-    "brown"
-  ];
+  const { loading, error, isOffline } = useFetch();
 
   if (isOffline) {
     return (
       <div className="offlineScreen">
-        <h2>Check your internet connection</h2>
+        <h2>Internet connection lost </h2>
         <div className="offlineToast">
-          <p>No internet — please reconnect.</p>
+          <p>Please reconnect to continue.</p>
         </div>
       </div>
     );
@@ -38,7 +19,7 @@ function App() {
   if (loading) {
     return (
       <div className="loadingScreen">
-        <h2>Loading, please wait...</h2>
+        <h2>Loading... please wait a moment</h2>
       </div>
     );
   }
@@ -51,18 +32,25 @@ function App() {
     );
   }
 
+
   return (
     <div className="mainBox">
-      {colors.map((color, index) => (
-        <div
-          key={index}
-          className="colorBox"
-          style={{ backgroundColor: color }}
-        >
-          <h3>Box {index + 1}</h3>
-          <p>Lorem ipsum dolor sit amet elit.</p>
-        </div>
-      ))}
+      <div className="colorBox box1"><h3>Box 1</h3><p>Lorem ipsum dolor sit amet elit.</p></div>
+      <div className="colorBox box2"><h3>Box 2</h3><p>Lorem ipsum dolor sit amet elit.</p></div>
+      <div className="colorBox box3"><h3>Box 3</h3><p>Lorem ipsum dolor sit amet elit.</p></div>
+      <div className="colorBox box4"><h3>Box 4</h3><p>Lorem ipsum dolor sit amet elit.</p></div>
+      <div className="colorBox box5"><h3>Box 5</h3><p>Lorem ipsum dolor sit amet elit.</p></div>
+      <div className="colorBox box6"><h3>Box 6</h3><p>Lorem ipsum dolor sit amet elit.</p></div>
+      <div className="colorBox box7"><h3>Box 7</h3><p>Lorem ipsum dolor sit amet elit.</p></div>
+      <div className="colorBox box8"><h3>Box 8</h3><p>Lorem ipsum dolor sit amet elit.</p></div>
+      <div className="colorBox box9"><h3>Box 9</h3><p>Lorem ipsum dolor sit amet elit.</p></div>
+      <div className="colorBox box10"><h3>Box 10</h3><p>Lorem ipsum dolor sit amet elit.</p></div>
+      <div className="colorBox box11"><h3>Box 11</h3><p>Lorem ipsum dolor sit amet elit.</p></div>
+      <div className="colorBox box12"><h3>Box 12</h3><p>Lorem ipsum dolor sit amet elit.</p></div>
+      <div className="colorBox box13"><h3>Box 13</h3><p>Lorem ipsum dolor sit amet elit.</p></div>
+      <div className="colorBox box14"><h3>Box 14</h3><p>Lorem ipsum dolor sit amet elit.</p></div>
+      <div className="colorBox box15"><h3>Box 15</h3><p>Lorem ipsum dolor sit amet elit.</p></div>
+      <div className="colorBox box16"><h3>Box 16</h3><p>Lorem ipsum dolor sit amet elit.</p></div>
     </div>
   );
 }

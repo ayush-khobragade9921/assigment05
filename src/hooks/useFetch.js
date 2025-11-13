@@ -1,45 +1,43 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 
-function useFetch(url) {
+function useFetch() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [isOffline, setIsOffline] = useState(!navigator.onLine);
+  const [isOffline, setIsOffline] = useState(false);
 
   useEffect(() => {
-    const handleOffline = () => {
+    
+    if (!window.navigator.onLine) {
       setIsOffline(true);
-      setError("No internet connection. Please check your connection.");
+      setError("You are offline. Please check your internet connection.");
+      setLoading(false);
+      return;
+    }
+
+   
+    const timer = setTimeout(() => setLoading(false), 1500);
+
+    
+    const goOffline = () => {
+      setIsOffline(true);
+      setError("No internet connection. Try again later.");
     };
 
-    const handleOnline = () => {
+    const goOnline = () => {
       setIsOffline(false);
       setError(null);
     };
 
-    window.addEventListener("offline", handleOffline);
-    window.addEventListener("online", handleOnline);
+    window.addEventListener("offline", goOffline);
+    window.addEventListener("online", goOnline);
 
-    const fetchData = async () => {
-      try {
-        if (!isOffline) {
-          const response = await fetch(url);
-          if (!response.ok) throw new Error("Failed to fetch data");
-        }
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        // delay hiding the loading screen for 2 seconds
-        setTimeout(() => setLoading(false), 2000);
-      }
-    };
-
-    fetchData();
-
+    
     return () => {
-      window.removeEventListener("offline", handleOffline);
-      window.removeEventListener("online", handleOnline);
+      clearTimeout(timer);
+      window.removeEventListener("offline", goOffline);
+      window.removeEventListener("online", goOnline);
     };
-  }, [url, isOffline]);
+  }, []);
 
   return { loading, error, isOffline };
 }
